@@ -8,8 +8,9 @@ import BookShelf from "./BookShelf";
 class BookList extends Component {
   state = {};
 
+  // update the shelves
   updateShelf = (bookId, event) => {
-    let currentBooks = this.props.currentBooks;
+    let currentBooks = this.props.currentBooks; // add the book from App.js
     const book = currentBooks.filter(book => book.id === bookId)[0];
     book.shelf = event.target.value;
     BooksAPI.update(book, event.target.value).then(response => {

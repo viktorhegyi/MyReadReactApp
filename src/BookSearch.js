@@ -10,6 +10,7 @@ class BookSearch extends Component {
     books: [],
   }
 
+  // update the data for the books
   updateData = (books) => {
     const curBooks = books.map(book => {
       book.shelf = "none";
@@ -25,19 +26,21 @@ class BookSearch extends Component {
     })
   }
 
+  // update the query when the user types in search bar
   updateQuery = (query) => {
     this.setState({ query })
     if (query) {
       BooksAPI.search(query).then((books) => {
         books.length > 0 ? this.updateData(books) : this.setState({books:[]})
       }).catch((e)=> {
-      console.error(`API error: ${e}`);
+      console.error(`API error: ${e}`); // catch if there is any error
     })
     }
     else
     {this.setState({books:[]})}
   }
 
+  // update the shelf for book
   updateBooks = (book, shelf)=> {
     let current = this.state.books;
     const bookToUpdate = current.filter(curBook => curBook.id === book.id)[0];

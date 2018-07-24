@@ -6,20 +6,24 @@ import BookSearch from "./BookSearch";
 import './App.css'
 
 class BooksApp extends Component {
+  // the books
   state = {
     books: []
   };
 
+  //call the BookAPI.js to get books
   componentDidMount() {
     this.updateData()
   }
 
+  //change the books on the shelves
   updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(response => {
       this.updateData()
     })
   }
 
+  //update the books in state
   updateData = () => {
     BooksAPI.getAll().then(book => {
             this.setState({
@@ -32,6 +36,7 @@ class BooksApp extends Component {
     return (
       <div className="app">
         <Route exact path="/" render={() => <BookList currentBooks={this.state.books} />} />
+        {/* navigate to search page */}
         <Route
         path="/search"
         render={() =>
